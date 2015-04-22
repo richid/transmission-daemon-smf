@@ -1,2 +1,7 @@
-cp transmission-daemon /lib/svc/method/
+#!/bin/sh
+
+INSTALL_DIR=${INSTALL_DIR:-/lib/svc/method/}
+cp transmission-daemon $INSTALL_DIR
+
+sed -i "s|__INSTALL_DIR__|$INSTALL_DIR|g" transmission-daemon.xml
 svccfg import -V transmission-daemon.xml
